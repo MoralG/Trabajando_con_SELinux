@@ -145,6 +145,8 @@ restorecon -v '/usr/share/nginx/html/nextcloud/nextcloud-data'
 
 Como podemos ver ahora la dirección por defecto es `/usr/share/nginx/html/nextcloud/nextcloud-data` con el contexto `httpd_sys_rw_content_t`.
 
+> El contexto `httpd_sys_rw_content_t` permite que el directorio del servidor web sea de lectura y escritura. Se sule aplicar a los ficheros donde la aplicación va a crear y modificar los contenidos de esta.
+
 ~~~
 sudo semanage fcontext -l | grep httpd_sys_rw_content_t | grep nginx
     /usr/share/nginx/html/nextcloud/nextcloud-data     all files          system_u:object_r:httpd_sys_rw_content_t:s0 
@@ -153,10 +155,6 @@ sudo semanage fcontext -l | grep httpd_sys_rw_content_t | grep nginx
 > **NOTA**: Hay muchos comandos para la administración del contexto de archivos de SELinux a parte de `semanage fcontext`, como por ejemplo `chcon` que es igual pero los cambios son temporales.
 
 Ahora vamos a activar políticas de seguridad para los diferentes servicios que tenemos funcionando en la máquina Salmorejo.
-
-**Wordpress**
-
-Vamos a permitir la conexión de Nginx a una base de datos, además de permitir el acceso a una red o puerto remoto. Estas opciónes es muy importante ya que es necesaria también para Nextcloud, phpMyAdmin, Mezzanine
 
 Antes de configurarlos, tenemos que ver si el puerto TCP/80 del http esta activado, para eso vamos a ejecutar el siguiente comando:
 
@@ -170,6 +168,10 @@ Como podemos ver lo tenemos configurado. En el caso de que no tengamos configura
 ~~~
 semanage port -a -t  http_port_t -p tcp 80
 ~~~
+
+**Wordpress**
+
+Vamos a permitir la conexión de Nginx a una base de datos, además de permitir el acceso a una red o puerto remoto. Estas opciónes es muy importante ya que es necesaria también para Nextcloud, phpMyAdmin, Mezzanine
 
 * Para la conexión a una red o puerto remoto.
 ~~~
