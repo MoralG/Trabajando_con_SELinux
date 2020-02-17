@@ -4,7 +4,7 @@ SELinux (Security-Enhanced Linux) es un mecanismo de seguridad, que se implement
 
 SELinux funciona como un módulo en el Kernel y complementa a los métodos de seguridad tradiccionales de controles de acceso discrecionales, como las ACL en Linux.
 
-En SELinux se trabajo con contexto de seguridad, que lo construyen 4 atributos de seguridad.
+En SELinux se trabaja con contextos de seguridad, que lo construyen 4 atributos de seguridad.
 
 * Identidad de usuario
 
